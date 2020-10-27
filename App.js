@@ -1,9 +1,10 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import WelcomeView from './views/welcome';
+import React from 'react'
+import WelcomeView from './views/welcome'
+import HomeView from './views/home'
 import { ApplicationProvider } from '@ui-kitten/components'
 import * as eva from '@eva-design/eva'
+import { NavigationContainer } from '@react-navigation/native'
+import { createStackNavigator } from '@react-navigation/stack'
 
 const chooseTheme = (isLight) => {
   if (isLight)
@@ -11,19 +12,17 @@ const chooseTheme = (isLight) => {
   return eva.dark
 }
 
+const Stack = createStackNavigator()
+
 export default function App() {
   return (
     <ApplicationProvider {...eva} theme={chooseTheme(true)}>
-      <WelcomeView />
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen name="Welcome" component={WelcomeView} />
+          <Stack.Screen name="Home" component={HomeView} />
+        </Stack.Navigator>
+      </NavigationContainer>
     </ApplicationProvider>
   )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
