@@ -1,14 +1,22 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import WelcomeView from './views/welcome';
+import { ApplicationProvider } from '@ui-kitten/components'
+import * as eva from '@eva-design/eva'
+
+const chooseTheme = (isLight) => {
+  if (isLight)
+    return eva.light
+  return eva.dark
+}
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+    <ApplicationProvider {...eva} theme={chooseTheme(true)}>
+      <WelcomeView />
+    </ApplicationProvider>
+  )
 }
 
 const styles = StyleSheet.create({
